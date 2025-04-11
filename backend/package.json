@@ -1,0 +1,35 @@
+{
+  "name": "fitness-app",
+  "version": "1.0.0",
+  "description": "Backend API for the FitLife fitness tracking application.",
+  "homepage": "https://github.com/Devil-sEye/fitness-app-major-project#readme",
+  "bugs": {
+    "url": "https://github.com/Devil-sEye/fitness-app-major-project/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devil-sEye/fitness-app-major-project.git"
+  },
+  "license": "ISC",
+  "author": "vishal",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js"
+  },
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "body-parser": "^2.2.0",
+    "colors": "^1.4.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongodb": "^6.15.0",
+    "mongoose": "^8.13.1",
+    "nodemon": "^3.1.9",
+    "stripe": "^18.0.0"
+  }
+}

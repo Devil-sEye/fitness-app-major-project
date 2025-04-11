@@ -1,0 +1,78 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+#cursor-trail {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; /* Allows clicks to pass through */
+    z-index: 9999; /* Ensure it's on top of other content */
+  }
+  
+  .trail-element {
+    width: 10px; /* Adjust size */
+    height: 10px; /* Adjust size */
+    background-color: #007bff; /* Adjust color */
+    border-radius: 50%; /* Make it a circle */
+    position: absolute;
+    opacity: 0.8;
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    transform: scale(1);
+  }
+  
+  .trail-element:last-child {
+    opacity: 0.2; /* Make the older ones fade out more */
+    transform: scale(0.5);
+  }
+  .app {
+    /* Global styles for the app */
+    background-color: white; /* Default light mode background */
+    color: black; /* Default light mode text color */
+  }
+  
+  .dark .app {
+    /* Dark mode specific global styles */
+    background-color: #1a202c;
+    color:whitesmoke; /* Example dark background color */
+  }
+  
+  /* Or for specific elements */
+  .some-element {
+    background-color: white;
+    color: black;
+  }
+  
+  .dark .some-element {
+    background-color: #1a202c; /* Example dark background color */
+    color: white;
+  }
+  .my-card {
+    background-color: #f0f0f0; /* Light mode background */
+    color: #333; /* Light mode text color */
+    border: 1px solid #ccc;
+  }
+  
+  .dark .my-card {
+    background-color: #333; /* Dark mode background */
+    color: #f0f0f0; /* Dark mode text color */
+    border: 1px solid #555;
+  }
+  .ripple {
+    position: fixed;
+    border-radius: 50%;
+    transform: scale(0);
+    opacity: 0.5;
+    background-color: rgba(0, 123, 255, 0.7); /* Adjust ripple color */
+    animation: ripple-effect 0.7s linear; /* Adjust animation duration and easing */
+    pointer-events: none; /* Allows clicks to pass through the ripple */
+  }
+  
+  @keyframes ripple-effect {
+    to {
+      transform: scale(2); /* Adjust the final size of the ripple */
+      opacity: 0;
+    }
+  }

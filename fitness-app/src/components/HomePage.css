@@ -1,0 +1,79 @@
+/* Fade-in animation for elements */
+.animate-fade-in {
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+  }
+  
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Slide-up animation for the features section */
+  .slide-up {
+    transform: translateY(50px);
+    opacity: 0;
+    animation: slideUp 0.8s ease-out forwards;
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Hero section specific styles (you might not need much here with Tailwind) */
+  .hero {
+    padding: 4rem 0;
+  }
+  
+  .hero h1 {
+    /* Tailwind handles font size and weight */
+  }
+  
+  .hero p {
+    /* Tailwind handles text color and size */
+  }
+  
+  .hero .highlight {
+    color: #4CAF50; /* Example highlight color */
+  }
+  
+  /* Feature card specific styles */
+  .features {
+    padding-bottom: 4rem;
+  }
+  
+  .feature-card {
+    /* Tailwind handles background, shadow, rounded, padding */
+    text-align: center;
+  }
+  
+  .feature-icon {
+    /* Tailwind handles text color and size */
+    display: block;
+    margin: 0 auto 1rem;
+  }
+  
+  .feature-card h2 {
+    /* Tailwind handles font size and weight */
+    margin-bottom: 1rem;
+    
+  }
+  
+  .feature-card p {
+     
+
+  }
+  
+  

@@ -1,0 +1,58 @@
+.navbar-container {
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .wave-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+
+  }
+   
+  .wave {
+    transform: translate(-50%, -50%) scale(5); /* Adjust for size */
+    opacity: 0;
+    transition: transform 0.5s ease-out, opacity 0.5s ease-out;
+
+  }
+  
+  .navbar-container:hover .wave {
+    opacity: 0.3; /* Adjust opacity on hover */
+    transform: translate(-50%, -50%) scale(7); /* Adjust scale on hover */
+
+  }
+  
+  .navbar a span {
+    display: inline-block;
+    transition: transform 0.2s ease-in-out, font-size 0.2s ease-in-out;
+  }
+  
+  .navbar:hover a span {
+    font-size: 1.05em;
+  }
+  
+  .navbar:hover a:nth-child(odd) span {
+    transform: translateX(2px) translateY(-2px);
+
+  }
+  
+  .navbar:hover a:nth-child(even) span {
+    transform: translateX(-2px) translateY(2px);
+  }
+  
+  .navbar a:hover span {
+    font-size: 1.1em;
+  }
+  
+  .navbar a:hover:nth-child(odd) span {
+    transform: translateX(4px) translateY(-4px);
+  }
+  
+  .navbar a:hover:nth-child(even) span {
+    
+    transform: translateX(-4px) translateY(4px);
+  }
