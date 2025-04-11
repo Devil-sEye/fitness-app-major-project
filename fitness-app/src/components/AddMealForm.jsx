@@ -1,10 +1,12 @@
+// Replace with your actual app ID and key
+const APP_ID = '3333c332'; // Your Application ID
+const APP_KEY = '974aee76ebc26396d8a40e2f3fab1306'; // You can use either of your Application Keys
+
 import React, { useState } from 'react';
-import foodData from '../data/foodData.json'; 
-console.log("Food Data:", foodData);
-
-
 
 function AddMealForm({ onAddMeal, onCancel }) {
+    // ... rest of your AddMealForm component code remains the same
+    // starting from the useState declarations
     const [mealName, setMealName] = useState('');
     const [foodItems, setFoodItems] = useState('');
     const [calories, setCalories] = useState('');
@@ -18,12 +20,18 @@ function AddMealForm({ onAddMeal, onCancel }) {
         const value = e.target.value;
         setFoodItems(value);
 
-        if (value.length < 1) { // Start suggesting after 2 characters
-            const filteredSuggestions = foodData.filter(item =>
-                item.name.toLowerCase().includes(value.toLowerCase())
-            );
-            setSuggestions(filteredSuggestions.slice(0, 5)); // Show the top 5 suggestions
-            setShowSuggestions(true);
+        if (value.length > 2) { // Start suggesting after 3 characters
+            fetch(`https://world.openfoodfacts.org/cgi/suggest.pl?tagtype=ingredients&term=${value}`)
+                .then(response => response.json())
+                .then(data => {
+                    setSuggestions(data); // The API returns an array of suggestions
+                    setShowSuggestions(true);
+                })
+                .catch(error => {
+                    console.error("Error fetching food suggestions:", error);
+                    setSuggestions([]);
+                    setShowSuggestions(false);
+                });
         } else {
             setSuggestions([]);
             setShowSuggestions(false);
@@ -31,13 +39,43 @@ function AddMealForm({ onAddMeal, onCancel }) {
     };
 
     const handleSuggestionClick = (suggestion) => {
-        setFoodItems(suggestion.name);
-        setCalories(suggestion.calories);
-        setProtein(suggestion.protein);
-        setCarbs(suggestion.carbs);
-        setFats(suggestion.fats);
+        setFoodItems(suggestion);
+        setCalories('');
+        setProtein('');
+        setCarbs('');
+        setFats('');
         setSuggestions([]);
         setShowSuggestions(false);
+
+        // Fetch nutritional information using the Nutritionix API
+        fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-app-id': APP_ID,
+                'x-app-key': APP_KEY,
+            },
+            body: JSON.stringify({
+                query: suggestion,
+            }),
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.foods && data.foods.length > 0) {
+                    const food = data.foods[0]; // Take the first matching food
+                    setCalories(food.nf_calories || '');
+                    setProtein(food.nf_protein || '');
+                    setCarbs(food.nf_total_carbohydrate || '');
+                    setFats(food.nf_total_fat || '');
+                } else {
+                    console.log("Nutritional information not found for:", suggestion);
+                    // Optionally show a message to the user
+                }
+            })
+            .catch(error => {
+                console.error("Error fetching product details:", error);
+                // Optionally show an error message to the user
+            });
     };
 
     const handleSubmit = (e) => {
@@ -70,6 +108,7 @@ function AddMealForm({ onAddMeal, onCancel }) {
             >
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Add New Meal</h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
+                    {/* ... rest of your form JSX */}
                     <div>
                         <label htmlFor="mealName" className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
                             Meal Name:
@@ -96,13 +135,13 @@ function AddMealForm({ onAddMeal, onCancel }) {
                         />
                         {showSuggestions && suggestions.length > 0 && (
                             <ul className="absolute z-10 mt-1 w-full bg-white dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-lg">
-                                {suggestions.map((suggestion) => (
+                                {suggestions.map((suggestion, index) => (
                                     <li
-                                        key={suggestion.name}
+                                        key={index}
                                         className="py-2 px-4 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300"
                                         onClick={() => handleSuggestionClick(suggestion)}
                                     >
-                                        {suggestion.name} ({suggestion.calories} Cal, P:{suggestion.protein}, C:{suggestion.carbs}, F:{suggestion.fats})
+                                        {suggestion}
                                     </li>
                                 ))}
                             </ul>
