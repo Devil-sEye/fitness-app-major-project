@@ -1,13 +1,15 @@
-const mongoose = require('mongoose');
+"use strict";
 
-const UserSchema = new mongoose.Schema({
+var mongoose = require('mongoose');
+
+var UserSchema = new mongoose.Schema({
   username: {
     type: String,
     required: true,
     unique: true,
     trim: true,
     minlength: 3,
-    maxlength: 50,
+    maxlength: 50
   },
   email: {
     type: String,
@@ -16,25 +18,22 @@ const UserSchema = new mongoose.Schema({
     trim: true,
     maxlength: 100,
     lowercase: true,
-    match: [
-      /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
-      'Please fill a valid email address'
-    ]
+    match: [/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/, 'Please fill a valid email address']
   },
   password: {
     type: String,
     required: true,
-    minlength: 6,
+    minlength: 6
   },
   firstName: {
     type: String,
     trim: true,
-    maxlength: 50,
+    maxlength: 50
   },
   lastName: {
     type: String,
     trim: true,
-    maxlength: 50,
+    maxlength: 50
   },
   age: {
     type: Number,
@@ -43,18 +42,18 @@ const UserSchema = new mongoose.Schema({
   },
   gender: {
     type: String,
-    enum: ['Male', 'Female', 'Other'],
+    "enum": ['Male', 'Female', 'Other']
   },
   isAdmin: {
     type: Boolean,
-    default: false,
+    "default": false
   },
   registrationDate: {
     type: Date,
-    default: Date.now
+    "default": Date.now
   }
-}, { timestamps: true });
-
-const User = mongoose.model('User', UserSchema);
-
+}, {
+  timestamps: true
+});
+var User = mongoose.model('User', UserSchema);
 module.exports = User;
