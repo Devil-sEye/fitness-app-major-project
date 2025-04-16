@@ -24,11 +24,18 @@ function LoginPage() {
 
     if (user) {
       toast.success(`Login successful as ${user.role}`);
+      localStorage.setItem('loggedInUser', JSON.stringify(user)); // Store user session
       navigate(user.role === 'admin' ? '/admin/dashboard' : '/user/dashboard');
     } else {
       setError('Invalid username or password');
       toast.error('Invalid username or password');
     }
+  };
+
+  const handleLogout = () => {
+    localStorage.removeItem('loggedInUser'); // Clear user session
+    toast.info('You have been logged out');
+    navigate('/login'); // Redirect to login page
   };
 
   return (
@@ -80,6 +87,12 @@ function LoginPage() {
             </p>
           </div>
         </form>
+        <button
+          onClick={handleLogout}
+          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 w-full"
+        >
+          Logout
+        </button>
       </section>
     </main>
   );

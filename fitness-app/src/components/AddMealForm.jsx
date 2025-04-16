@@ -1,12 +1,6 @@
-// Replace with your actual app ID and key
-const APP_ID = '3333c332'; // Your Application ID
-const APP_KEY = '974aee76ebc26396d8a40e2f3fab1306'; // You can use either of your Application Keys
-
 import React, { useState } from 'react';
 
 function AddMealForm({ onAddMeal, onCancel }) {
-    // ... rest of your AddMealForm component code remains the same
-    // starting from the useState declarations
     const [mealName, setMealName] = useState('');
     const [foodItems, setFoodItems] = useState('');
     const [calories, setCalories] = useState('');
@@ -40,50 +34,22 @@ function AddMealForm({ onAddMeal, onCancel }) {
 
     const handleSuggestionClick = (suggestion) => {
         setFoodItems(suggestion);
+        // We are no longer fetching nutritional information here
         setCalories('');
         setProtein('');
         setCarbs('');
         setFats('');
         setSuggestions([]);
         setShowSuggestions(false);
-
-        // Fetch nutritional information using the Nutritionix API
-        fetch('https://trackapi.nutritionix.com/v2/natural/nutrients', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-app-id': APP_ID,
-                'x-app-key': APP_KEY,
-            },
-            body: JSON.stringify({
-                query: suggestion,
-            }),
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.foods && data.foods.length > 0) {
-                    const food = data.foods[0]; // Take the first matching food
-                    setCalories(food.nf_calories || '');
-                    setProtein(food.nf_protein || '');
-                    setCarbs(food.nf_total_carbohydrate || '');
-                    setFats(food.nf_total_fat || '');
-                } else {
-                    console.log("Nutritional information not found for:", suggestion);
-                    // Optionally show a message to the user
-                }
-            })
-            .catch(error => {
-                console.error("Error fetching product details:", error);
-                // Optionally show an error message to the user
-            });
+        // The backend will handle fetching nutritional data for this food item
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         onAddMeal({
             name: mealName,
-            items: foodItems,
-            calories: parseInt(calories, 10) || 0,
+            items: foodItems, // Sending the food item name to the backend
+            calories: parseInt(calories, 10) || 0, // You might want to handle default values on the backend
             protein: parseInt(protein, 10) || 0,
             carbs: parseInt(carbs, 10) || 0,
             fats: parseInt(fats, 10) || 0,
@@ -108,7 +74,6 @@ function AddMealForm({ onAddMeal, onCancel }) {
             >
                 <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 mb-4">Add New Meal</h3>
                 <form onSubmit={handleSubmit} className="space-y-4">
-                    {/* ... rest of your form JSX */}
                     <div>
                         <label htmlFor="mealName" className="block text-gray-700 dark:text-gray-300 text-sm font-bold mb-2">
                             Meal Name:

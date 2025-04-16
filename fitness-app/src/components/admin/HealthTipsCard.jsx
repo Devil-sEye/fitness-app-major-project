@@ -10,7 +10,7 @@ const healthTips = [
 
 function HealthTipsCard() {
   return (
-    <div className="my-card bg-white shadow-md rounded-md p-6">
+    <div className="my-card bg- shadow-md rounded-md p-6">
       <h2 className="text-xl font-semibold text-gray-700 mb-2">Health Tips</h2>
       <ul className="list-disc pl-5 text-gray-600">
         {healthTips.map((tip, index) => (

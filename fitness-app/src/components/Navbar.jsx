@@ -16,10 +16,10 @@ function classNames(...classes) {
 
 export default function Navbar({ onToggleTheme, theme }) { // Receive onToggleTheme and theme as props
   const user = "user1"; 
-  const userNavigation = user
+  const userNavigation =user
     ? [
         { name: 'Dashboard', to: user.isAdmin ? '/admin/Dashboard' : '/user/Dashboard1', current: false },
-        { name: 'Logout', to: '/logout', current: false },
+        { name: 'Logout', to: '/logOut', current: false },
         { name: 'Profile', to: '/user/profile', current: false },
         { name: 'Settings', to: '/user/settings', current: false },
         { name: 'Customization', to: '/user/customization', current: false },
@@ -31,6 +31,9 @@ export default function Navbar({ onToggleTheme, theme }) { // Receive onToggleTh
         { name: 'Sign Up', to: '/register', current: false },
 
       ];
+      
+    
+      
 
   return (
     <Disclosure as="nav" className="bg-gray-800" >

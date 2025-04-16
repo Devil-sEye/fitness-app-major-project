@@ -35,4 +35,5 @@ app.delete('/api/workout/:workoutId', workoutController.deleteWorkout); // Route
 // Start the server
 app.listen(port, () => {
   console.log(`Server is running on port ${port}`.green);
+  return (console.log(`Server is running on port ${port}`.green));
 });
