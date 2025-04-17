@@ -32,11 +32,7 @@ function LoginPage() {
     }
   };
 
-  const handleLogout = () => {
-    localStorage.removeItem('loggedInUser'); // Clear user session
-    toast.info('You have been logged out');
-    navigate('/login'); // Redirect to login page
-  };
+ 
 
   return (
     <main className="bg-gray-100 min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
@@ -87,12 +83,7 @@ function LoginPage() {
             </p>
           </div>
         </form>
-        <button
-          onClick={handleLogout}
-          className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline mt-4 w-full"
-        >
-          Logout
-        </button>
+        
       </section>
     </main>
   );

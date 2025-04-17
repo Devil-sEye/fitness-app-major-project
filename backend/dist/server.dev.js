@@ -30,8 +30,10 @@ app.get('/', function (req, res) {
   res.send('Hello from the Fitness backend!');
 }); // Route for user registration
 
-app.post('/api/register', userController.registerUser); //app.post('/api/login', userController.loginUser); // Route for user login
-//app.get('/api/users', userController.getAllUsers); // Route to get all users
+app.post('/api/register', userController.registerUser);
+app.post('/api/login', userController.loginUser); // Route for user login
+
+app.get('/api/users', userController.getAllUsers); // Route to get all users
 
 app.post('/api/nutrition', nutritionController.createNutritionLog); // Route to create a nutrition log
 

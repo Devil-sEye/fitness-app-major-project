@@ -14,8 +14,10 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(' ');
 }
 
-export default function Navbar({ onToggleTheme, theme }) { // Receive onToggleTheme and theme as props
-  const user = "user1"; 
+export default function Navbar({ onToggleTheme, theme }) { 
+  const user = localStorage.getItem('loggedInUser')
+    ? JSON.parse(localStorage.getItem('loggedInUser')): null;
+
   const userNavigation =user
     ? [
         { name: 'Dashboard', to: user.isAdmin ? '/admin/Dashboard' : '/user/Dashboard1', current: false },

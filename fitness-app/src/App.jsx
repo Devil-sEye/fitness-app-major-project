@@ -17,6 +17,8 @@ import UserProfilePage from './pages/user/UserProfilePage'
 import UserSettingsPage from './pages/user/UserSettingsPage';
 import UserCustomizationPage from './pages/user/UserCustomizationPage';
 
+
+
 import './cursorEffects.js'; // Import your cursor effects file here
 
 import './index.css'; 
@@ -49,7 +51,7 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/logout" element={<Logout />} />
+          //<Route path="/logout" element={<logOut />} />
           <Route path="/register" element={<SignupPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/user/dashboard" element={<UserDashboard />} />
